@@ -3,7 +3,8 @@ package api
 import "github.com/gofiber/fiber/v2"
 
 func RegisterRoutes(pH *PropertyHandler, app *fiber.App) {
-	app.Post("/properties/register-property", pH.RegisterProperty)
-	app.Get("/properties/:name/:code", pH.GetProperty)
-	app.Get("/properties/search", pH.SearchProperty)
+	propertiesRouter := app.Group("/properties")
+	propertiesRouter.Post("/register-property", pH.RegisterProperty)
+	propertiesRouter.Get("/:name/:code", pH.GetProperty)
+	propertiesRouter.Get("/search", pH.SearchProperty)
 }
